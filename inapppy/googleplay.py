@@ -210,8 +210,8 @@ class GooglePlayVerifier:
             result = self.check_purchase_subscription(purchase_token, product_sku, service)
             verification_result.raw_response = result
 
-            cancel_reason = int(result.get("cancelReason", 0))
-            if cancel_reason != 0:
+            cancel_reason = int(result.get("cancelReason", None))
+            if cancel_reason is not None:
                 verification_result.is_canceled = True
 
             ms_timestamp = result.get("expiryTimeMillis", 0)
